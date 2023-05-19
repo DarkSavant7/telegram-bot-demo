@@ -1,0 +1,92 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  compression:
+    mime-types: text/html, text/xml, text/plain, text/css, text/javascript, application/javascript, application/json, application/xml, image/png, image/jpg, image/gif, image/jpeg
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+  output:
+    ansi:
+      enabled: always
+  main:
+    banner-mode: console
+  application:
+    name: demo-telegram-bot
+springdoc:
+  webjars:
+    prefix:
+  swagger-ui:
+    path: "/"
+    disable-swagger-default-url: true
+    url: /v3/api-docs.yaml
+    enabled: true
+logging:
+  level:
+    org.dark.savant: debug
+    root: debug
+  file:
+    name: history.log
+bot:
+  telegram:
+    name: TelRanTestDemoBot
+    token: xxxxx
+  api:
+    currency:
+      key: xxxxxxx
+      convert-url: https://anyapi.io/api/v1/exchange/convert?base={baseCurrency}&apiKey={apiKey}&to={to}&amount={amount}
+      rates-url: https://anyapi.io/api/v1/exchange/rates?base={baseCurrency}&apiKey={apiKey}
+      available-currencies:
+        - USD
+        - EUR
+        - JPY
+        - BGN
+        - CZK
+        - DKK
+        - GBP
+        - HUF
+        - PLN
+        - RON
+        - SEK
+        - CHF
+        - ISK
+        - NOK
+        - TRY
+        - AUD
+        - BRL
+        - CAD
+        - CNY
+        - HKD
+        - IDR
+        - ILS
+        - INR
+        - KRW
+        - MXN
+        - MYR
+        - NZD
+        - PHP
+        - SGD
+        - THB
+        - ZAR
+#      objects:
+#        - id: id1
+#          name: name1
+#          value: value1
+#        - id: id2
+#          name: name2
+#          value: value2
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
